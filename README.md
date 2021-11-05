@@ -122,9 +122,30 @@ in our project we could integration test the CREATE method and then check that t
 if we created our lemon above and received the 201 status code and status test created we could then read all of the proudcts and expect a status code of 200, status test of ok 
 and a message body containing the lemon that we created. 
 
-Alternatively we could 'blackbox' System test by using the front end to create a new product and reading the page to make sure tha tthe new product has been created. 
-This will test from a User acceptance test side. 
+Alternatively we could 'blackbox' System test by using the front end to create a new product and reading the page to make sure tha the new product has been created. 
+This will test from a User acceptance test side but worried mainly on the functionality. 
 
+
+## User Acceptance Testing
+
+An example of a user acceptance test would be: 
+
+#Acceptance criteria
+*As a* user 
+*when* I enter a product id into the update field
+*and* enter new information 
+*I Want* to be able to see that the product has updated
+
+#BDD Scenario
+GIVEN that a user can access the front-end of the API
+WHEN they enter a valid id into the update field 
+AND they enter a name 
+AND they enter a description 
+AND they enter a price
+AND they click the PUT button 
+THEN the updated product is visible on the page 
+
+ 
 
 --------
 
