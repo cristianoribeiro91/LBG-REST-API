@@ -157,7 +157,7 @@ app.delete('/product/delete/:id', (req,res) => {
         if (err) res.send(err);
         
         // otherwise we send HTTP status of 204 (NO CONTENT)
-        res.status(202).send(`Deleted product by id: ${prodId}`);
+        res.status(204).send(`Deleted product by id: ${prodId}`);
 
         // console log that we are deleting the products
         log(`Deleted product by id: ${prodId}`);
