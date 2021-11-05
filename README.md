@@ -114,6 +114,17 @@ If we test the DELETE endpoint by sending a request with a method of 'DELETE' an
 STATUS code: 204
 STATUS text: No content 
 
+## System Testing
+
+Our first example of system testing is 'system integration testing' to perform this 
+in our project we could integration test the CREATE method and then check that the output from the READ method is expected. 
+
+if we created our lemon above and received the 201 status code and status test created we could then read all of the proudcts and expect a status code of 200, status test of ok 
+and a message body containing the lemon that we created. 
+
+Alternatively we could 'blackbox' System test by using the front end to create a new product and reading the page to make sure tha tthe new product has been created. 
+This will test from a User acceptance test side. 
+
 
 --------
 
