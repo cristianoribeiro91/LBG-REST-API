@@ -1,18 +1,18 @@
-const express = require('express'); // express import from node_modules
-const Datastore = require('nedb'); // Database import from node_modules
-const db = new Datastore(); // Database setup
-const chalk = require('chalk'); // chalk import from node_modules
-const app = express(); // 
-const log = console.log; // setting console.log to log
-const bodyParser = require('body-parser'); // Body Parser for data in http requests
+const express = require('express'); // express import from node_modules 
+const Datastore = require('nedb'); // Database import from node_modules CR: This is a local db. It imports the nedb module. Its an in memory db. 
+const db = new Datastore(); // Database setup CR:initiate a new database 
+const chalk = require('chalk'); // chalk import from node_modules CR: This is to make command line look pretty. 
+const app = express(); // CR: create the actuall app so starting a new instance of express
+const log = console.log; // setting console.log to log CR: this is to make logging quicker so you dont type console.log all the time not needed
+const bodyParser = require('body-parser'); // Body Parser for data in http requests CR: This is to get hold of the message body. This is a way of getting hold of the response body data. So we set up a 
 
-// add body parser to app
+// add body parser to app CR: adding a way to parse the body to the app. 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-// serve static files through express
+// serve static files through express CR: this is just directory to the front end as per the relative path. 
 app.use(express.static(__dirname + '/public'));
 
 //function to build product
@@ -77,6 +77,7 @@ app.get('/product/read', (req,res) => {
 });
 
 // READ (one) - RESTful GET
+//:in id means its a parameter
 app.get('/product/read/:id', (req,res) => {
 
     // pretty logging with Chalk!
@@ -103,6 +104,7 @@ app.get('/product/read/:id', (req,res) => {
 });
 
 // UPDATE - RESTful PUT
+//:in id means its a parameter
 app.put('/product/update/:id', (req,res) => {
 
     // pretty logging with Chalk!
@@ -111,6 +113,8 @@ app.put('/product/update/:id', (req,res) => {
     // getting the product id from the URL as a parameter
     let prodId = req.params.id;
 
+    // we could also do it using a product builder as opposed to doing it individually as per below
+    //Here you create a new product
     let updatedProd = {
         // get ID from URL as parameter
         _id : prodId,
@@ -120,7 +124,7 @@ app.put('/product/update/:id', (req,res) => {
         price : req.body.price
     };
 
-    // query the Database '_id:' to get the product
+    // query the Database '_id:' to get the product and then pass in new product updateProd
     db.update({_id: prodId}, updatedProd, (err, product) => {
 
         // if error, send a response containing the error message
@@ -153,7 +157,7 @@ app.delete('/product/delete/:id', (req,res) => {
         if (err) res.send(err);
         
         // otherwise we send HTTP status of 204 (NO CONTENT)
-        res.status(202).send(`Deleted product by id: ${prodId}`);
+        res.status(204).send(`Deleted product by id: ${prodId}`);
 
         // console log that we are deleting the products
         log(`Deleted product by id: ${prodId}`);
