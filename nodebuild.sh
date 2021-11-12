@@ -1,4 +1,5 @@
 #!/bin/bash
+#CR script
 #assume sudo apt install nodejs and sudo apt install npm has been run and those programmes are installed else 
 #npm commands wont run
 npm install
