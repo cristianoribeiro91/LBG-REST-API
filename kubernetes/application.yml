@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: node-app
+  name: node-app-deployment    # name of deployment 
   labels:
-    app: node-app
+    app: node-app-deployment   # This can be whatever you would like 
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: node-app # must be the same value as the label in the template 
+      app: node-app # must be the same value as the label in the template it will use the selector label to check it always has two of those labels running 
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -22,4 +22,4 @@ spec:
       - name: node-app
         image: gcr.io/lbg-training/node-app:24
         ports:
-        - containerPort: 8080  
+        - containerPort: 8080
