@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-app
+  labels:
+    app: node-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node-app # must be the same value as the label in the template 
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  template:
+    metadata:
+      labels:
+        app: node-app # this label is assigned to each pod in the set 
+    spec:
+      containers:
+      - name: node-app
+        image: gcr.io/lbg-training/node-app:24
+        ports:
+        - containerPort: 8080  
